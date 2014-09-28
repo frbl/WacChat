@@ -7,10 +7,19 @@ wacc2014App.controller('ChatController', function($scope, $http, $timeout, Messa
   $scope.send_message = function() {
     console.log($scope.message);
     Message.save($scope.message);
-    $scope.messages.push($scope.message);
+    socket.emit('send_message', $scope.message);
+    add_message($scope.message);
     $scope.message = {name: $scope.message.name};
   };
-  
+
+  socket.on('receive_message', function(data){
+      add_message(data);
+   });
+
+  function add_message(message) {
+      $scope.messages = $scope.messages || [];
+      $scope.messages.push(message);
+  }
   
   $scope.refresh = function() {
     Message.query(function(data){

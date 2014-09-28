@@ -15,7 +15,6 @@ exports.show = function(req, res, id) {
 };
 
 exports.create = function(req, res) {
-  console.log('Loadisdaasddasng!!!');
   var message = new Message(req.body);
   message.save(function (err, message) {
     if (err) return console.error(err);
