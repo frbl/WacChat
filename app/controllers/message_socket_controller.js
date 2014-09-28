@@ -1,0 +1,3 @@
+exports.vote = function(socket) {
+
+};

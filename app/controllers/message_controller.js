@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Message = mongoose.model('Message')
+var Message = mongoose.model('Message');
 
 exports.load = function(req, res) {
   Message.find(function (err, messages) {
@@ -15,8 +15,8 @@ exports.show = function(req, res, id) {
 };
 
 exports.create = function(req, res) {
-  console.log('Loadisdaasddasng!!!')
-  var message = new Message(req.body)
+  console.log('Loadisdaasddasng!!!');
+  var message = new Message(req.body);
   message.save(function (err, message) {
     if (err) return console.error(err);
     res.status(201).end();

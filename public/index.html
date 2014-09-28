@@ -29,10 +29,13 @@
     
     <!-- Angular services -->
     <script src="javascripts/services/message_service.js"></script>
+    <script src="javascripts/services/socket_service.js"></script>
     
     <!-- Socket.io -->
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-    
+    <script>
+        var socket = io();
+    </script>
   </head>
   <body>
     <div class="row">

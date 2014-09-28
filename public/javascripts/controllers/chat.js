@@ -1,4 +1,4 @@
-wacc2014App.controller('ChatController', function($scope, $http, $timeout, Message) {
+wacc2014App.controller('ChatController', function($scope, $http, $timeout, Message, socket) {
   $scope.message = {};
   $http({method:'GET', url: 'api'}).success(function(data){
     $scope.chat_content = data;
@@ -7,10 +7,9 @@ wacc2014App.controller('ChatController', function($scope, $http, $timeout, Messa
   $scope.send_message = function() {
     console.log($scope.message);
     Message.save($scope.message);
-    $scope.messages.push($scope.message)
+    $scope.messages.push($scope.message);
     $scope.message = {name: $scope.message.name};
-
-  }
+  };
   
   
   $scope.refresh = function() {
@@ -19,5 +18,5 @@ wacc2014App.controller('ChatController', function($scope, $http, $timeout, Messa
       console.log('refreshed' + data);
     });
     console.log($scope.messages)
-  }
+  };
 });
