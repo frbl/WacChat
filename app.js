@@ -4,10 +4,13 @@ var path = require('path');
 
 var app = express();
 
+// Require our config variables
 var config = require('./config/config');
+
+// Require all express boilerplate
 require('./config/express')(app);
 
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Load all models
