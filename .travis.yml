@@ -1,3 +1,6 @@
+before_script:
+  - npm install -g bower
+  - bower install -f
 language: node_js
 node_js:
 - '0.11'
@@ -5,7 +8,15 @@ deploy:
   provider: heroku
   api_key:
     secure: h9fTFB78Fg3T68rNq7lJOAxeBPMEB574d5ycdXkRHFaTTPdUPFQqAR2IpQGt5TDEQ5qN1xkHdVqVLSbcxLPaZywedjqQk6xUgkyIXwkdyBKrtspvk47PfB6hi/hZgwqUS/LvtTppmEa8b6NroJXYZ4x24uF49+9rR9XXnPFfX+s=
+  skip_cleanup: true
   app: 
     production: wacc2014
   on:
     repo: frbl/WacChat
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/c7221c310d73040384ce
+    on_success: always
+    on_failure: always
+    on_start: false

@@ -16,6 +16,7 @@
     "less-middleware": "1.0.x",
     "mongodb": "~1.4.12",
     "mongoose": "~3.8.16",
-    "socket.io": "1.0.2"
+    "socket.io": "1.0.2",
+    "nodetime": "*"
   }
 }
