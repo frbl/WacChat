@@ -1,6 +1,6 @@
-var username = 'wacc2014';
-var password = '928e1ac2eb381';
+var username = 'temp_wacc2014';
+var password = 'temp_password';
 
 module.exports = {
-  db: process.env.MONGOHQ_URL || 'mongodb://' + username + ':' + password + '@kahana.mongohq.com:10082/app29963537'
+  db: process.env.MONGOLAB_URI || 'mongodb://' + username + ':' + password + '@ds055772.mongolab.com:55772/heroku_knb4ckbx'
 };
