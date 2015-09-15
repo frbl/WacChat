@@ -23,7 +23,7 @@ io.sockets.on('connection', message_socket_controller.manage_messages);
 <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
 
 //public/javascripts/controllers/chat_controller.js
-wacc2014App.controller('ChatController', function ($scope, $http, $timeout, Message, Socket) {
+waccchatApp.controller('ChatController', function ($scope, $http, $timeout, Message, Socket) {
 
 $scope.send_message = function () {
   Message.save($scope.message);
@@ -39,7 +39,7 @@ socket.on('receive_message', function (data) {
 
 
 //New file: public/javascripts/services/socket_service.js
-wacc2014App.factory('socket', function ($rootScope) {
+waccchatApp.factory('socket', function ($rootScope) {
   var socket = io.connect();
 
   // Copied from http://www.ibm.com/developerworks/library/wa-nodejs-polling-app/

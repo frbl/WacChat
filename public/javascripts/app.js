@@ -1,11 +1,11 @@
-var wacc2014App = angular.module('wacc2014', ['ngRoute',
-                                              'wacc2014Controllers', 
-                                              'wacc2014Services']);
+var wacchatApp = angular.module('wacchat', ['ngRoute',
+                                              'wacchatControllers', 
+                                              'wacchatServices']);
 
-var wacc2014Controllers = angular.module('wacc2014Controllers', []);
-var wacc2014Services = angular.module('wacc2014Services', ['ngResource']);
+var wacchatControllers = angular.module('wacchatControllers', []);
+var wacchatServices = angular.module('wacchatServices', ['ngResource']);
 
-wacc2014App.config(['$routeProvider', 
+wacchatApp.config(['$routeProvider', 
   function($routeProvider) {
   $routeProvider
     .otherwise({
