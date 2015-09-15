@@ -1,11 +1,11 @@
 var wacchatApp = angular.module('wacchat', ['ngRoute',
-                                              'wacchatControllers', 
+                                              'wacchatControllers',
                                               'wacchatServices']);
 
 var wacchatControllers = angular.module('wacchatControllers', []);
 var wacchatServices = angular.module('wacchatServices', ['ngResource']);
 
-wacchatApp.config(['$routeProvider', 
+wacchatApp.config(['$routeProvider',
   function($routeProvider) {
   $routeProvider
     .otherwise({
