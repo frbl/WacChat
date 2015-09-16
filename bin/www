@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 require('newrelic');
-var debug = require('debug')('wacc2014');
+var debug = require('debug')('wacchat');
 var app = require('../app');
 
