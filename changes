@@ -39,7 +39,7 @@ socket.on('receive_message', function (data) {
 
 
 //New file: public/javascripts/services/socket_service.js
-waccchatApp.factory('socket', function ($rootScope) {
+wacchatApp.factory('socket', function ($rootScope) {
   var socket = io.connect();
 
   // Copied from http://www.ibm.com/developerworks/library/wa-nodejs-polling-app/
