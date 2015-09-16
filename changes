@@ -17,10 +17,6 @@ io.sockets.on('connection', message_socket_controller.manage_messages);
 
 
 //Client side
-<script src="javascripts/services/socket_service.js"></script>
-
-<!-- Socket.io -->
-<script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
 
 //public/javascripts/controllers/chat_controller.js
 waccchatApp.controller('ChatController', function ($scope, $http, $timeout, Message, Socket) {
@@ -65,3 +61,8 @@ wacchatApp.factory('socket', function ($rootScope) {
   };
 });
 
+// Index.html
+<script src="javascripts/services/socket_service.js"></script>
+
+<!-- Socket.io -->
+<script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
