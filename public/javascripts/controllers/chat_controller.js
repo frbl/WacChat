@@ -1,4 +1,4 @@
-wacchatApp.controller('ChatController', function($scope, $http, $timeout, Message, Socket) {
+wacchatApp.controller('ChatController', function($scope, $http, $timeout, Message, socket) {
   $scope.message = {};
   $http({
     method: 'GET',
