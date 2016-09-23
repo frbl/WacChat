@@ -1,0 +1,8 @@
+machine:
+  timezone:
+    Europe/Amsterdam
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: wacchat
