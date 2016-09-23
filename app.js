@@ -1,9 +1,7 @@
 require('./config/nodetime');
-require('newrelic');
 var fs = require('fs');
 var express = require('express');
 var path = require('path');
-
 var app = express();
 
 // Require our config variables
