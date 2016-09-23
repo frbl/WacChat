@@ -3,8 +3,8 @@ machine:
     Europe/Amsterdam
 dependencies:
   pre:
-  - npm install -g bower
-  - bower install -f
+    - npm install -g bower
+    - bower install -f
 deployment:
   staging:
     branch: master
