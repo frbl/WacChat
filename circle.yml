@@ -27,7 +27,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+        at: ~/repo
       run:
         name: Add remote
         command: git remote add staging git@heroku.com:wacchat.git
