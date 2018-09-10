@@ -1,17 +1,51 @@
-machine:
-  timezone:
-    Europe/Amsterdam
-dependencies:
-  pre:
-    - npm install bower
-    - bower install -f
-test:
-  override:
-    - echo "No tests"
-deployment:
-  staging:
-    branch: master
-    commands:
-      - git remote add staging git@heroku.com:wacchat.git
-      - '[[ ! -e "$(git rev-parse --git-dir)/shallow" ]] || git fetch --unshallow'
-      - git push -f staging $CIRCLE_SHA1:refs/heads/master
+version: 2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.9.1
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-.
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm install bower
+      - run: npm install
+      - run: bower install -f
+      - run:
+          name: Tests
+          command: 'echo no tests here!'
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      run:
+        name: Add remote
+        command: git remote add staging git@heroku.com:wacchat.git
+      run:
+        name: Shallow clone
+        command: '[[ ! -e "$(git rev-parse --git-dir)/shallow" ]] || git fetch --unshallow'
+      run:
+        name: Push to heroku
+        command: git push -f staging $CIRCLE_SHA1:refs/heads/master
+workflows:
+  version: 2
+  package-deploy:
+    jobs:
+      - build
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
