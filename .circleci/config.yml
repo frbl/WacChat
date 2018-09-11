@@ -38,17 +38,15 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - attach_workspace:
-        at: ~/repo
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-npm-{{ checksum "package-lock.json" }}
-      - restore_cache:
-          key: v1-bower-{{ checksum "bower.json" }}
       - run:
           name: Tests
           command: 'echo no tests here!'
+  coverage:
+    <<: *defaults
+    steps:
+      - run:
+          name: Coverage
+          command: 'echo no actual code coverage here!'
   deploy:
     <<: *defaults
     steps:
@@ -84,6 +82,12 @@ workflows:
       - build:
           requires:
             - checkout_code
+      - test:
+          requires:
+            - build
+      - coverage:
+          requires:
+            - build
       - deploy:
           filters:
             branches:
@@ -91,3 +95,5 @@ workflows:
                 - master
           requires:
             - build
+            - test
+            - coverage
