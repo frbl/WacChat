@@ -62,7 +62,7 @@ jobs:
           key: v1-bower-{{ checksum "bower.json" }}
       - run:
           name: Create known hosts file
-          command: touch ~/.ssh/known_hosts 
+          command: mkdir -p ~/.ssh && touch ~/.ssh/known_hosts 
       - run:
           name: Accept all heroku origins for now
           command: ssh-keyscan heroku.com >> ~/.ssh/known_hosts 
