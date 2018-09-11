@@ -74,10 +74,10 @@ workflows:
   version: 2
   commit:
     jobs:
-      - checkout
+      - checkout_code
       - build:
           requires:
-            - checkout
+            - checkout_code
       - deploy:
           filters:
             branches:
