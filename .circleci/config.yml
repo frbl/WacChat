@@ -26,7 +26,7 @@ jobs:
           key: v1-bower-{{ checksum "bower.json" }}
       - run: npm install bower
       - run: npm install
-      - run: bower install -f
+      #- run: bower install -f
       - save_cache:
           key: v1-npm-{{ checksum "package-lock.json" }}
           paths:
