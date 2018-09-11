@@ -61,6 +61,9 @@ jobs:
       - restore_cache:
           key: v1-bower-{{ checksum "bower.json" }}
       - run:
+          name: Accept all heroku origins for now
+          command: ssh-keyscan heroku.com >> ~/.ssh/known_hosts 
+      - run:
           name: Add remote
           command: git remote add staging git@heroku.com:wacchat.git
       - run:
