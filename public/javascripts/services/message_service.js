@@ -1,3 +1,3 @@
 wacchatServices.factory('Message', function ($resource) {
-  return $resource('api/messages/:messageId', {messageId: '@messageId'});
-});
+  return $resource('api/messages/:messageId', { messageId: '@messageId' })
+})

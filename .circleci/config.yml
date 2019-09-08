@@ -1,0 +1,99 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.9.1
+
+version: 2.0
+
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo
+
+  build:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-npm-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          key: v1-bower-{{ checksum "bower.json" }}
+      - run: npm install bower
+      - run: npm install
+      #- run: bower install -f
+      - save_cache:
+          key: v1-npm-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/repo/node_modules
+      - save_cache:
+          key: v1-bower-{{ checksum "bower.json" }}
+          paths:
+            - ~/repo/bower_components
+  test:
+    <<: *defaults
+    steps:
+      - run:
+          name: Tests
+          command: 'echo no tests here!'
+  coverage:
+    <<: *defaults
+    steps:
+      - run:
+          name: Coverage
+          command: 'echo no actual code coverage here!'
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-npm-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          key: v1-bower-{{ checksum "bower.json" }}
+      - run:
+          name: Create known hosts file
+          command: mkdir -p ~/.ssh && touch ~/.ssh/known_hosts 
+      - run:
+          name: Accept all heroku origins for now
+          command: ssh-keyscan heroku.com >> ~/.ssh/known_hosts 
+      - run:
+          name: Add remote
+          command: git remote add staging git@heroku.com:wacchat.git
+      - run:
+          name: Shallow clone
+          command: '[[ ! -e "$(git rev-parse --git-dir)/shallow" ]] || git fetch --unshallow'
+      - run:
+          name: Push to heroku
+          command: git push -f staging $CIRCLE_SHA1:refs/heads/master
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - checkout_code
+      - build:
+          requires:
+            - checkout_code
+      - test:
+          requires:
+            - build
+      - coverage:
+          requires:
+            - build
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
+            - test
+            - coverage
