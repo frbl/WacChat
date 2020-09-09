@@ -1,4 +1,4 @@
-wacchatApp.controller('ChatController', function ($scope, $http, $timeout, Message) {
+wacchatApp.controller('ChatController', function ($scope, $http, $timeout, Message, socket) {
   $scope.message = {}
   $http({
     method: 'GET',
@@ -17,10 +17,15 @@ wacchatApp.controller('ChatController', function ($scope, $http, $timeout, Messa
       return false
     }
     Message.save($scope.message)
+    socket.emit('send_message', $scope.message);
     add_message($scope.message)
     $scope.message = {
       name: $scope.message.name
     }
+
+    socket.on('receive_message', function (data) {
+      add_message(data);
+    });
   }
 
   function add_message (message) {
